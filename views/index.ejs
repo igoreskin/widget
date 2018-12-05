@@ -1,6 +1,49 @@
-<html>
+<DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Widget</title>
-    <div>
-        <%= items %>
-    </div>
+</head>
+
+<body>
+    
+
+    <div id="main"></div>
+
+    <script>
+
+        let display = ''
+
+        function displayItems() {
+            let items = <%- JSON.stringify(items) %>;
+            display = items.map((item, index) => {
+
+                return (
+                `<p id=${index}>
+				<img src=${item.thumbnail[0].url} height=${item.thumbnail[0].height} width=${item.thumbnail[0].width} alt=${item.name}/><br>
+				name: ${item.name}<br>
+				branding: ${item.branding}<br>
+				categories: ${item.categories}<br>
+				origin: ${item.origin}<br>
+				url: ${item.url}<br>
+				</p>
+			`
+                )
+            })
+            loadHtml()
+        } 
+
+        loadHtml = () => {
+            document.getElementById('main').innerHTML = '<div>' + display + '</div>';
+        }
+
+        displayItems()
+    
+    </script>
+</body>
+
 </html>
+
